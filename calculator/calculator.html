@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/calulator.css" />
+	</head>
+
+	<body>
+		<div id="aboutMe">
+			<span id="hint">首次打开本页面时请双击home键开启计算器</span>
+			<span id="Me">-</span>
+		</div>
+		<div id="bodyDiv" onselectstart="return false";>
+			<!--顶部听筒部分-->
+			<div id="divTop">
+				<!--听筒以、呼吸灯以及镜头-->
+				<div id="hear"></div>
+				<div id="light"></div>
+				<div id="camera">
+					<div id="cameraSmall"></div>
+				</div>
+			</div>
+			<!--手机屏幕关闭-->
+			<div id="bigDivClose" onselectstart="return false";></div>
+			<!--手机屏幕开启-->
+			<div id="bigDiv" onselectstart="return false";>
+				<!--获取本地时间-->
+				<div id="topTime" onselectstart="return false";></div>
+				<!--定义计算器显示器-->
+				<div id="show_text" onselectstart="return false";>
+					<input type="text" name="" id="show_textTop" value="" disabled="false" onselectstart="return false";/>
+					<input type="text" name="" id="show_textDown" value="" disabled="false" onselectstart="return false";/>			
+				</div>
+				<!--设置计算器键盘-->
+				<div id="keyBoard">
+					<!--键盘第1行-->
+					<div id="keyBoardRow1" onselectstart="return false";>
+						<div id="clean" onselectstart="return false";>C</div>
+						<div id="del" onselectstart="return false";>DEL</div>
+						<div class="operation" id="multiplication" onselectstart="return false";>x</div>
+						<div class="operation" id="division" onselectstart="return false";>÷</div>
+					</div>
+					<!--键盘第2行-->
+					<div id="keyBoardRow2" onselectstart="return false";>
+						<div class="num" id="num7" onselectstart="return false";>7</div>
+						<div class="num" id="num8" onselectstart="return false";>8</div>
+						<div class="num" id="num9" onselectstart="return false";>9</div>
+						<div class="operation" id="addition" onselectstart="return false";>+</div>
+					</div>
+					<!--键盘第3行-->
+					<div id="keyBoardRow3" onselectstart="return false";>
+						<div class="num" id="num4" onselectstart="return false";>4</div>
+						<div class="num" id="num5" onselectstart="return false";>5</div>
+						<div class="num" id="num6" onselectstart="return false";>6</div>
+						<div class="operation" id="subtraction" onselectstart="return false";>﹣</div>
+					</div>
+					<!--键盘4-5行-->
+					<div id="keyBoardRow4_5" onselectstart="return false";>
+						<!--键盘第4行-->
+						<div id="keyBoardRow4">
+							<div class="num" id="num1" onselectstart="return false";>1</div>
+							<div class="num" id="num2" onselectstart="return false";>2</div>
+							<div class="num" id="num3" onselectstart="return false";>3</div>
+						</div>
+						<!--键盘第5行-->
+						<div id="keyBoardRow5" onselectstart="return false";>
+							<div class="num" id="num0" onselectstart="return false";>0</div>
+							<div class="num" id="point" onselectstart="return false";>.</div>
+						</div>
+					</div>
+					<!--键盘=号-->
+					<div id="result" onselectstart="return false";>=</div>
+				</div>
+			</div>
+			<!--底部功能键部分-->
+			<div id="divButton" onselectstart="return false";>
+				<div id="home" onselectstart="return false";></div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="js/calulator.js" type="text/javascript" charset="utf-8"></script>

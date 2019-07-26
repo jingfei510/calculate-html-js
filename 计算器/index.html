@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>网页版简单计算器</title>
+		<style type="text/css">
+			body {
+				background: darkcyan;
+			}
+
+			table {
+				background: dimgray;
+			}
+
+			#show {
+				height: 50px;
+				width: 396px;
+				font-size: 40px;
+				color: black;
+				background: whitesmoke;
+				border: #8FBC8F 1px solid;
+			}
+
+			#showNum {
+				height: 50px;
+				width: 396px;
+				font-size: 20px;
+				color: navy;
+				background: whitesmoke;
+				border: #8FBC8F 1px solid;
+			}
+
+			tr {
+				text-align: center;
+				
+
+			}
+
+			td {
+				width: 100px;
+				font-size: 30px;
+				color: white;
+				
+			}
+
+			td:hover {
+				cursor: pointer;
+				background: black;
+			}
+
+			#calc {
+				margin-left: 250px;
+				margin-top: 20px;
+				float: left;
+				border: white 5px solid;
+			}
+
+			#img {
+				width: 396px;
+				height: 600px;
+				margin-left: 200px;
+				margin-top: 50px;
+				background-size: 100% 100%;
+				background-image: url(img/678.jpg);
+				float: left;
+			}
+
+			#wenzi {
+				
+				width: 20px;
+				height: 600px;
+				margin-left: 50px;
+				margin-top: 100px;
+				float: left;
+				font-size: 20px;
+				color: white;
+				line-height: 35px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="img"></div>
+		<div id="wenzi">山有木兮木有枝心悦君兮君不知</div>
+		<!-- disabled="disabled" 禁用输入框的输入功能-->
+		<div id="calc">
+			<center><input type="text" name="" id="showNum" value="" disabled="disabled" />
+				<center><input type="text" name="" id="show" value="0" disabled="disabled" />
+					<table border="1" cellspacing="0" cellpadding="2" align="center" width="400px" height="550px">
+						<tr>
+							<td id="clear">C</td>
+							<td id="del">退格</td>
+							<td>%</td>
+							<td class="czf">/</td>
+						</tr>
+						<tr>
+							<td class="num">7</td>
+							<td class="num">8</td>
+							<td class="num">9</td>
+							<td class="czf">*</td>
+						</tr>
+						<tr>
+							<td class="num">4</td>
+							<td class="num">5</td>
+							<td class="num">6</td>
+							<td class="czf">-</td>
+						</tr>
+						<tr>
+							<td class="num">1</td>
+							<td class="num">2</td>
+							<td class="num">3</td>
+							<td class="czf">+</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="num">0</td>
+
+							<td class="num" id="dian">.</td>
+							<td id="result">=</td>
+						</tr>
+
+					</table>
+				</center>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//开发步骤:1,页面布局
+		//2.实现功能
+		//2.1 我们把数字和小数点归为一类
+		//2.2 把运算符归为一类
+		//2.3 显示框 =号 退格键,清除键 单独设置id 
+		//2.4 以上设置好之后,把他们的标签对象获取出来
+		//2.5 给数字设置好了点击事件后,要将点击的数字,显示到文本框上面
+		//2.5 定义三个变量,用来保存用户输入的一个数字,第二个数字,以及运算符
+		//2.6 我们给运算符设置点击事件
+		//获取显示框的对象
+		var show_Num = document.getElementById("showNum");
+		var show_Result = document.getElementById("show");
+		//获取清除键
+		var clear = document.getElementById("clear");
+		//获取退格键
+		var del = document.getElementById("del");
+		//获取等号
+		var result = document.getElementById("result");
+		//获取所有的数字,并且给给他们设置点击事件
+		var nums = document.getElementsByClassName("num");
+		var numValue1 = "0";
+		var numValue2 = "";
+		var opr = "";
+		var flag = true;
+		show_Num.value = "";
+
+		for (var i = 0; i < nums.length; i++) {
+			nums[i].onclick = function() {
+
+				//alert("tantantan");
+				//获取td之间的内容展示到文本框上
+				var txt = this.innerText
+				if (txt == ".") {
+					if (flag) {
+						numValue1 += "";
+						numValue1 += txt; //注意追加
+						show_Num.value += txt;
+						flag = false;
+						if (numValue1.charAt(0) == "0" && numValue1.charAt(1) != ".") {
+							numValue1 = numValue1.substring(1);
+						}
+						show_Result.value = numValue1; //显示用户输入的数字
+
+					}
+				} else {
+					numValue1 += txt; //注意追加
+					show_Num.value += txt;
+					if (numValue1.charAt(0) == "0" && numValue1.charAt(1) != ".") {
+						numValue1 = numValue1.substring(1);
+					}
+					show_Result.value = numValue1; //显示用户输入的数字
+
+				}
+
+
+			}
+
+		}
+
+		//获取所有的操作符,并给他们设置点击事件
+		var oprs = document.getElementsByClassName("czf");
+		for (var i = 0; i < oprs.length; i++) {
+			oprs[i].onclick = function() {
+
+				if (numValue2 == "") {
+					//做运算逻辑: 我把第一个数给第二个数,再把第一个数清空,要等待接收用户下一次的收入
+					numValue2 = numValue1;
+					numValue1 = "";
+					opr = this.innerText; //保存一下操作符
+
+					show_Num.value += opr;
+					flag = true;
+				} else { //他可能会点击= 或者继续点击运算符
+					//处理四则:把上一次的结果算出来,赋给第二个数,清空第一个数
+					if (numValue1 != "") {
+						resultFun();
+					}
+					opr = this.innerText; //再次保存一下操作符
+					show_Num.value += opr;
+					flag = true;
+				}
+
+			}
+		}
+		//先做归0键
+		clear.onclick = function() {
+			numValue1 = "";
+			numValue2 = "";
+			opr = "";
+			show_Result.value = "0";
+			show_Num.value="";
+
+		}
+		//做退格键
+		del.onclick = function() {
+			//点一下删一个数字 789 退到最后一个就不退了
+			if (numValue1.length != 1) {
+				if (numValue1[numValue1.length - 1] == ".") {
+					flag = true;
+				}
+				numValue1 = numValue1.substring(0, numValue1.length - 1);
+				show_Result.value = numValue1;
+				show_Num.value=show_Num.value.substring(0,show_Num.value.length-1);
+
+			}
+		}
+
+		//我们已经拿到三个数据 两个数 以及一个运算符,给等号设置点击
+
+		result.onclick = function() {
+
+			resultFun();
+
+		}
+		//具体做运算
+		function resultFun() {
+			flag = true;
+			//把两个数的数据类型,转成数字类型
+			var one = new Number(numValue2);
+			var two = new Number(numValue1);
+			var r = null;
+			switch (opr) {
+				case "+":
+					r = one + two;
+					r = parseFloat(r.toFixed(8));
+					break;
+				case "-":
+					r = one - two;
+					r = parseFloat(r.toFixed(8));
+					break;
+				case "*":
+					r = one * two;
+					r = parseFloat(r.toFixed(8));
+					break;
+				case "/":
+					if (two == 0) {
+
+					} else {
+						if (two != 0) {
+							r = one / two;
+							r = parseFloat(r.toFixed(8));
+						}
+					}
+
+					break;
+			}
+			//把结果再赋给第二个数
+			numValue2 = r;
+			numValue1 = ""; //清空第一个数
+			show_Result.value = numValue2 * 1;
+			show_Num.value = numValue2 * 1;
+		}
+	</script>
+</html>
